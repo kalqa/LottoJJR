@@ -8,5 +8,7 @@ import lombok.Builder;
 public record TicketDto(
         String hash,
         Set<Integer> numbers,
-        LocalDateTime drawDate) {
+        LocalDateTime drawDate,
+        String message,
+        Integer age) {
 }
