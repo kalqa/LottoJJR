@@ -11,10 +11,10 @@ class NumberValidator {
     private static final int MAX_VALUE_NUMBER_FROM_USER = 99;
     private static final int MIN_VALUE_NUMBER_FROM_USER = 1;
 
-
-    List<ValidationResult> errors = new LinkedList<>();
+    List<ValidationResult> errors;
 
     List<ValidationResult> validate(Set<Integer> numbersFromUser) {
+        errors = new LinkedList<>();
         if (!isNumbersSizeEqualSix(numbersFromUser)) {
             errors.add(ValidationResult.NOT_SIX_NUMBERS_GIVEN);
         }

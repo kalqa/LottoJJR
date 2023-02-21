@@ -7,11 +7,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import pl.lotto.BaseIntegrationTest;
 import pl.lotto.domain.numbergenerator.WinningNumbersGeneratorFacade;
 import pl.lotto.domain.numbergenerator.WinningNumbersNotFoundException;
+import pl.lotto.domain.numberreceiver.dto.NumberReceiverResponseDto;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -55,13 +59,21 @@ public class UserPlayedLottoAndWonIntegrationTest extends BaseIntegrationTest {
         ResultActions perform = mockMvc.perform(post("/inputNumbers")
                 .content("""
                         {
-                        "inputNumbers": [1,2,3,4,5,6]
-                        }                                                            
-                        """
+                        "inputNumbers": [1,2,30,50,55,61]
+                        }
+                        """.trim()
                 ).contentType(MediaType.APPLICATION_JSON)
         );
         // then
-        perform.andExpect(status().isOk());
+        MvcResult mvcResult = perform.andExpect(status().isOk()).andReturn();
+        String json = mvcResult.getResponse().getContentAsString();
+        NumberReceiverResponseDto numberReceiverResponseDto = objectMapper.readValue(json, NumberReceiverResponseDto.class);
+        assertAll(
+                () -> assertThat(numberReceiverResponseDto.ticketDto().drawDate()).isEqualTo(drawDate),
+                () -> assertThat(numberReceiverResponseDto.ticketDto().hash()).isNotNull(),
+                () -> assertThat(numberReceiverResponseDto.message()).isEqualTo("SUCCESS")
+        );
+
 
         //step 4: user made GET /results/notExistingId and system returned 404(NOT_FOUND) and body with (message: Not found for id: notExistingId and status NOT_FOUND)
         //step 5: 3 days and 1 minute passed, and it is 1 minute after the draw date (19.11.2022 12:01)
