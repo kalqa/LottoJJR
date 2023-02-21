@@ -20,12 +20,13 @@ public class WinningNumbersGeneratorFacade {
         SixRandomNumbersDto sixRandomNumbersDto = randomGenerable.generateSixRandomNumbers(properties.count(), properties.lowerBand(), properties.upperBand());
         Set<Integer> winningNumbers = sixRandomNumbersDto.numbers();
         winningNumberValidator.validate(winningNumbers);
-        winningNumbersRepository.save(WinningNumbers.builder()
-                .winningNumbers(winningNumbers)
-                .date(nextDrawDate)
-                .build());
+//        winningNumbersRepository.save(WinningNumbers.builder()
+//                .winningNumbers(winningNumbers)
+//                .date(nextDrawDate)
+//                .build());
         return WinningNumbersDto.builder()
                 .winningNumbers(winningNumbers)
+                .date(nextDrawDate)
                 .build();
     }
 
