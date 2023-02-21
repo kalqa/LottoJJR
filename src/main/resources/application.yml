@@ -5,8 +5,14 @@ spring:
 
 lotto:
   number-generator:
+    facade:
+      count: 25
+      lowerBand: 1
+      upperBand: 99
     http:
       client:
         config:
           uri: http://www.randomnumberapi.com
           port: 80
+          connectionTimeout: 5000
+          readTimeout: 5000
