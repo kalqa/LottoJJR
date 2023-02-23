@@ -1,8 +1,6 @@
 package pl.lotto.domain.numberreceiver;
 
 import java.time.Clock;
-import java.time.LocalDateTime;
-import java.util.Collection;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,26 +15,6 @@ public class NumberReceiverConfiguration {
     @Bean
     HashGenerable hashGenerable() {
         return new HashGenerator();
-    }
-
-    @Bean
-    TicketRepository ticketRepository() {
-        return new TicketRepository() {
-            @Override
-            public Collection<Ticket> findAllTicketsByDrawDate(LocalDateTime drawDate) {
-                return null;
-            }
-
-            @Override
-            public Ticket findByHash(String hash) {
-                return null;
-            }
-
-            @Override
-            public Ticket save(Ticket savedTicket) {
-                return null;
-            }
-        };
     }
 
     @Bean
