@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Builder
 @Document
-record WinningNumbers(
+public record WinningNumbers(
         @Id
         String id,
         Set<Integer> winningNumbers,
