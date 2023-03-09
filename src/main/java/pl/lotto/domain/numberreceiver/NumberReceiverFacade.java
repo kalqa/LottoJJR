@@ -26,23 +26,14 @@ public class NumberReceiverFacade {
             return new NumberReceiverResponseDto(null, resultMessage);
         }
         LocalDateTime drawDate = drawDateGenerator.getNextDrawDate();
-
         String hash = hashGenerator.getHash();
-
+        Ticket ticket = new Ticket(hash, numbersFromUser, drawDate);
+        Ticket savedTicket = ticketRepository.save(ticket);
         TicketDto generatedTicket = TicketDto.builder()
-                .hash(hash)
-                .numbers(numbersFromUser)
-                .drawDate(drawDate)
+                .hash(savedTicket.hash())
+                .numbers(savedTicket.numbers())
+                .drawDate(savedTicket.drawDate())
                 .build();
-
-        Ticket savedTicket = Ticket.builder()
-                .hash(hash)
-                .numbers(generatedTicket.numbers())
-                .drawDate(generatedTicket.drawDate())
-                .build();
-
-        ticketRepository.save(savedTicket);
-
         return new NumberReceiverResponseDto(generatedTicket, INPUT_SUCCESS.info);
     }
 

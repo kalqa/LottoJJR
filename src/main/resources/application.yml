@@ -1,9 +1,36 @@
 spring:
-  main:
-    allow-bean-definition-overriding: true
   data:
     mongodb:
-      uri: mongodb://admin:admin@localhost:27017/lotto-web
+      uri: mongodb://admin:admin@mongo/lotto-web
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  main:
+    allow-bean-definition-overriding: true
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
