@@ -1,4 +1,4 @@
-db.createUser(
+db.getSiblingDB("admin").createUser(
     {
         user: "admin",
         pwd: "admin",
