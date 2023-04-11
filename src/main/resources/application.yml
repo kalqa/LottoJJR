@@ -4,6 +4,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB_NAME}?authSource=${MONGO_AUTH_SOURCE}
+      auto-index-creation: true
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER

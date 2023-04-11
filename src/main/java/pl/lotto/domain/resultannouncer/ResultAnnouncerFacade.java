@@ -33,7 +33,7 @@ public class ResultAnnouncerFacade {
             return new ResultAnnouncerResponseDto(null, HASH_DOES_NOT_EXIST_MESSAGE.info);
         }
         ResponseDto responseDto = buildResponseDto(resultDto);
-        responseRepository.save(buildResponse(responseDto));
+        responseRepository.save(buildResponse(responseDto, LocalDateTime.now(clock)));
         if (responseRepository.existsById(hash) && !isAfterResultAnnouncementTime(resultDto)) {
             return new ResultAnnouncerResponseDto(responseDto, WAIT_MESSAGE.info);
         }
@@ -43,13 +43,15 @@ public class ResultAnnouncerFacade {
         return new ResultAnnouncerResponseDto(responseDto, LOSE_MESSAGE.info);
     }
 
-    private static ResultResponse buildResponse(ResponseDto responseDto) {
+    private static ResultResponse buildResponse(ResponseDto responseDto, LocalDateTime now) {
         return ResultResponse.builder()
                 .hash(responseDto.hash())
                 .numbers(responseDto.numbers())
                 .hitNumbers(responseDto.hitNumbers())
+                .wonNumbers(responseDto.wonNumbers())
                 .drawDate(responseDto.drawDate())
                 .isWinner(responseDto.isWinner())
+                .createdDate(now)
                 .build();
     }
 
@@ -60,6 +62,7 @@ public class ResultAnnouncerFacade {
                 .hitNumbers(resultDto.hitNumbers())
                 .drawDate(resultDto.drawDate())
                 .isWinner(resultDto.isWinner())
+                .wonNumbers(resultDto.wonNumbers())
                 .build();
     }
 

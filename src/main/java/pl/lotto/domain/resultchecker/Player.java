@@ -13,5 +13,7 @@ record Player(
         Set<Integer> numbers,
         Set<Integer> hitNumbers,
         LocalDateTime drawDate,
-        boolean isWinner) {
+        boolean isWinner,
+        Set<Integer> wonNumbers
+        ) {
 }
