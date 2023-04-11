@@ -26,11 +26,11 @@ services:
 
   lotto:
     container_name: lotto
-#    build: .
-    image: 054968576252.dkr.ecr.eu-central-1.amazonaws.com/lotto2:latest
+    build: .
+#    image: 054968576252.dkr.ecr.eu-central-1.amazonaws.com/lotto2:latest
     restart: always
     ports:
-      - '8000:8080'
+      - '8000:8000'
     environment:
       MONGO_USER: admin
       MONGO_PASSWORD: admin
@@ -38,3 +38,11 @@ services:
       MONGO_PORT: 27017
       MONGO_DB_NAME: lotto-web
       MONGO_AUTH_SOURCE: admin
+
+  lotto-frontend:
+    container_name: lotto-frontend
+#    build: .
+    image: lottofront:latest
+    restart: always
+    ports:
+      - '80:80'
