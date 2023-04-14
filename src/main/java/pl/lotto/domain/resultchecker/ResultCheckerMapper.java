@@ -15,6 +15,7 @@ class ResultCheckerMapper {
                         .hitNumbers(player.hitNumbers())
                         .drawDate(player.drawDate())
                         .isWinner(player.isWinner())
+                        .wonNumbers(player.wonNumbers())
                         .build())
                 .collect(Collectors.toList());
     }
