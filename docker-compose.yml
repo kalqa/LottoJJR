@@ -41,8 +41,8 @@ services:
 
   lotto-frontend:
     container_name: lotto-frontend
-#    build: .
-    image: lottofront:latest
+#    image: lottofrontendzik:latest
+    image: 054968576252.dkr.ecr.eu-central-1.amazonaws.com/lotto-front:latest
     restart: always
     ports:
       - '80:80'
