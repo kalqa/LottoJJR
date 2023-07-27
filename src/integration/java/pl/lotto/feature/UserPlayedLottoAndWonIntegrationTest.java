@@ -120,8 +120,8 @@ public class UserPlayedLottoAndWonIntegrationTest extends BaseIntegrationTest {
                 );
 
 
-        //step 7: 6 minutes passed and it is 1 minute after the draw (19.11.2022 12:01)
-        clock.plusMinutes(6);
+        //step 7: 85 minutes passed and it is 1 hour and 20 minutes after the draw (19.11.2022 13:20)
+        clock.plusMinutes(85);
 
 
         //step 8: ser made GET /results/sampleTicketId and system returned 200 (OK)
